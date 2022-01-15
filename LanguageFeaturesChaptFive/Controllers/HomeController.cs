@@ -19,9 +19,10 @@ namespace LanguageFeaturesChaptFive.Controllers
             foreach (Product p in Product.GetProducts())
             {
                 string name = p?.Name ?? "<No Name>";
+                //string category = p?.Category;
                 decimal? price = p?.Price ?? 0;
                 string relatedName = p?.Related?.Name ?? "<None>";
-                results.Add(string.Format($"Name:{name}, Price:{price}, Related:{relatedName}"));
+                results.Add($"Name: {name}, Price: {price:C2}, Related: {relatedName}");
 
             }
             return View(results);
