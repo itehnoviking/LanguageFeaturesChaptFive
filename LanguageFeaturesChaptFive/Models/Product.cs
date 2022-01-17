@@ -11,6 +11,7 @@
         public decimal? Price { get; set; }
         public Product Related { get; set; }
         public bool InStock { get; }
+        public bool NameBeginsWith1 => Name?[0] == '1';
 
         public static Product[] GetProducts()
         {
@@ -21,7 +22,7 @@
                 Price = 1100M
             };
 
-            Product denga1950 = new Product(false)
+            Product denga1950 = new Product
             {
                 Name = "Денга 1750 г.",
                 Price = 150M
@@ -42,7 +43,7 @@
             polushka1735.Related = polushka1736;
             polushka1736.Related = polushka1735;
 
-            return new Product[] { odnaKopeyka1844em, polushka1736, polushka1735, null };
+            return new Product[] { odnaKopeyka1844em, polushka1736, polushka1735, denga1950, null };
         }
     }
 }
