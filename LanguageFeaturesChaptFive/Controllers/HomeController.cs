@@ -15,17 +15,34 @@ namespace LanguageFeaturesChaptFive.Controllers
 
         public IActionResult Index()
         {
-            List<string> results = new List<string>();
-            foreach (Product p in Product.GetProducts())
+            ShoppingCart cart = new ShoppingCart
             {
-                string name = p?.Name ?? "<No Name>";
-                //string category = p?.Category;
-                decimal? price = p?.Price ?? 0;
-                string relatedName = p?.Related?.Name ?? "<None>";
-                results.Add($"Name: {name}, Price: {price:C2}, Related: {relatedName}");
+                Products = Product.GetProducts()
+            };
 
-            }
-            return View(results);
+            Product[] productArray =
+            {
+                new Product
+                {
+                    Name = "1 копейка серебром 1844 г. Е.М.",
+                    Price = 1100M
+                },
+
+                new Product
+                {
+                    Name = "Полушка 1736 г.",
+                    Price = 180M
+                }
+            };
+
+            decimal cartTotal = cart.TotalPrices();
+            decimal arrayTotal = productArray.TotalPrices();
+
+            return View("Index", new string[]
+            {
+                $"Cart Total: {cartTotal:C2}",
+                $"Array Total: {arrayTotal:C2}"
+            });
         }
 
         public IActionResult Privacy()
